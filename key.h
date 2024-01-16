@@ -2,9 +2,10 @@
 // Created by Fir on 2023/2/8.
 //
 
-#ifndef KEY_H
-#define KEY_H
+#ifndef OLED_KEY_FIR_H
+#define OLED_KEY_FIR_H
 
+#include "../../3rdParty/u8g2/u8g2.h"
 #include "stm32f1xx.h"
 #include "main.h"
 
@@ -27,24 +28,30 @@ extern "C" {
 typedef enum
 {
   KEY_CHECK = 0,
-  KEY_COMFIRM = 1,
-  KEY_RELEASE = 2
+  KEY_0_COMFIRM,
+  KEY_1_COMFIRM,
+  KEY_RELEASE,
 } KEY_STATE;
 
 typedef enum
 {
-  NULL_KEY = 0,
-  SHORT_KEY = 1,
-  LONG_KEY
+  KEY_NOT_PRESSED = 0,
+  KEY_PRESSED,
 } KEY_TYPE;
 
 //对应的按键值，
 typedef enum
 {
   KEY_NULL = 0,
-  KEY_0,
-  KEY_1,
+  KEY_0_CLICK,  //轻击
+  KEY_0_PRESS,  //长按
+  KEY_1_CLICK,
+  KEY_1_PPESS,
 } KEY_VALUE;
+
+extern KEY_TYPE g_KeyActionFlag;
+
+extern KEY_VALUE g_KeyValue;
 
 extern void Key_Scan(void);
 
@@ -56,4 +63,4 @@ extern uint8_t g_KeyFlag;                // 按键有效标志，0： 按键值�
 }
 #endif
 
-#endif //KEY_H
+#endif //OLED_KEY_FIR_H
